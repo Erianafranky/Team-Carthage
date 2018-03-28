@@ -53,10 +53,30 @@ class Comment(object):
        self.to_be_moderated = []
 
 def main():
-   choice = input('what do you want to do >>>')
-   if choice == 1:
-       user1 = User.register('collo','12343','12343')
-       print (user1)
+    print (
+        """
+          welcome to the commentor app
+          You can:
+          1 register
+          2 login
+          3 add comment
+          4 edit comment
+          5 view comments
+        """
+    )
+    choice = input('what do you want to do >>>')
+    if choice == 1:
+        print ('you have chosen to register, enter your details.')
+        username = str(input('Enter name'))
+        pwd = str(input('Enter pwd'))
+        cnf_pwd =str(('Enter confirm password'))
+        User.register(username,pwd,cnf_pwd)
+    elif choice == 2:
+        print ('you have chosen to login, enter your details.')
+        username = input('Enter name')
+        pwd = input('Enter pwd')
+        User.login(username,pwd)
+  
 
 
 
