@@ -4,7 +4,7 @@ class User(object):
         self.users = [{'admin':'admin12','is_admin':True},{'moderator':'mod1','is_moderator':True}]
         self.isadmin = False
         self.is_moderator = False  
-        self.comments = list() 
+        self.comments = [] 
     def register(self, username, password,confirm):
         id = len(self.users)
         if username.strip() == '':
@@ -85,6 +85,7 @@ def main():
         pwd = str(input('Enter pwd'))
         cnf_pwd = str(input('Enter confirm password'))
         user1.register(username,pwd,cnf_pwd)
+        print(user1.users)
 
     elif choice == 2:
         print ('you have chosen to login, enter your details.')
@@ -96,8 +97,8 @@ def main():
         print ('you have chosen to add a comment.')
         username = input('Enter username')    
         body = input('Enter comment body')
-        user1.login(username,pwd)
         user1.Comment(3,body,username,2)
+        print (user1.comments)
 
     elif choice == 5:
         print ('you have chosen to view comments.')
@@ -106,5 +107,8 @@ def main():
  
 if __name__ == '__main__':
     main()
+
+
+
 
 
