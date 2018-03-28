@@ -3,18 +3,19 @@ class User(object):
     def __init__(self):
         self.users = [{'admin':'admin12','is_admin':True},{'moderator':'mod1','is_moderator':True}]
         self.isadmin = False
-        self.is_moderator = False   
-    def register(self, username, password, conf_pwd):
+        self.is_moderator = False  
+        self.comments = list() 
+    def register(self, username, password,confirm):
         id = len(self.users)
         if username.strip() == '':
             print ("username should not be empty")
-        if password != conf_pwd:
+        if password != confirm:
             print ('password mistmatch')
         user = {
              'user_id': id,
              'username':username,
              'password':password,
-             'confirm':conf_pwd,
+             'conf_pwd':confirm,
               self.isadmin : False,
               self.is_moderator : False
 
@@ -28,8 +29,19 @@ class User(object):
             continue
         print ('user does not exist')
 
+
     def Comment(self,id, body, username, user_id):
-        pass
+           comment = {
+           'comment_id': id,
+           'user_id': user_id,
+           'username':username,
+           'body':body}
+           self.comments.append(comment)
+           
+    def view_all(self):
+        for comment in self.comments:
+            print(comment)
+
 class Moderator(User):
     def __init__(self, id,body):
        pass
@@ -53,6 +65,7 @@ class Comment(object):
         self.to_be_moderated = []
 
 def main():
+    user1 = User()
 
     print (
         """
@@ -70,22 +83,28 @@ def main():
         print ('you have chosen to register, enter your details.')
         username = str(input('Enter name'))
         pwd = str(input('Enter pwd'))
-        cnf_pwd = str(('Enter confirm password'))
-        User.register(username,pwd,cnf_pwd)
+        cnf_pwd = str(input('Enter confirm password'))
+        user1.register(username,pwd,cnf_pwd)
 
     elif choice == 2:
         print ('you have chosen to login, enter your details.')
         username = input('Enter name')
         pwd = input('Enter pwd')
-        User.login(username,pwd)
+        user1.login(username,pwd)
 
     elif choice == 3:
-        print ('you have chosen to add, enter comment  details.')
-        title = input('Enter name')
-        body = input('Enter pwd')
-        User.login(username,pwd)
+        print ('you have chosen to add a comment.')
+        username = input('Enter username')    
+        body = input('Enter comment body')
+        user1.login(username,pwd)
+        user1.Comment(3,body,username,2)
+
+    elif choice == 5:
+        print ('you have chosen to view comments.')
+        user1.view_all()
   
  
 if __name__ == '__main__':
     main()
+
 
