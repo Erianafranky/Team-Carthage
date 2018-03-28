@@ -1,4 +1,4 @@
-import cmd
+#coding: UTF-8
 class User(object):
     def __init__(self):
         self.users = [{'admin':'admin12','is_admin':True},{'moderator':'mod1','is_moderator':True}]
